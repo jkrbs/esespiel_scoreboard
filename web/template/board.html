@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="/static/style.css"> 
+    </head>
+    <body>
+        <h1>Score Board of {{.User}}</h1>
+        <p>Push a button to verify the completion of each task.</p>
+        <table>
+            {{range .Storylines}}
+            <tr>
+                <td class="storyname">
+                    {{.Name}}
+                </td>
+                {{range .Tasks}}
+                    <td>
+                        {{if .Finished}}
+                        {{.Title}}
+                        {{else}}
+                        <form action="/verify?task={{.Title}}"><button type="submit">{{.Title}}</button></form>
+                        {{end}}
+                    </td>
+                {{end}}
+            </tr>
+            {{end}}
+        </table>
+    </body>
+</html>

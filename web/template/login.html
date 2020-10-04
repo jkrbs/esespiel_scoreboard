@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="/static/style.css"> 
+    </head>
+    <body>
+        <table>
+            <thead>
+                <td>
+                    Platz
+                </td>
+                <td>
+                    Name
+                </td>
+                <td>
+                    Punktestand
+                </td>
+            </thead>
+            {{range $i, $r := .}}
+            <tr>
+                <td>
+                    {{$i}}
+                </td>
+                <td>
+                    {{$r.Name}}
+                </td>
+                <td>
+                    {{$r.Points}}
+                </td>
+            </tr>
+            {{end}}
+        </table>
+
+        <form method="POST" action="/login">
+            <input type="text" id="username" name="username">
+            <input type="password" id="password" name="password">
+            <input type="submit" title="Login">
+        </form>
+    </body>
+</html>
