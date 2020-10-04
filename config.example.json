@@ -1,0 +1,6 @@
+{
+	"ListenAddress": "localhost:8888",
+	"DBType": "sqlite",
+	"DBConn": "storage.db",
+	"AdminKey": "blablabla"
+}
