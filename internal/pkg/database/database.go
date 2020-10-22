@@ -217,19 +217,22 @@ type finished struct {
 func VerifyTask(user string, task string, key string) {
 	var tasks []Task
 	db.Where("title is ?", task).Find(&tasks)
+	if len(tasks) == 0 {
+		return
+	}
 	if tasks[0].Key != key {
 		return
 	}
 	var u User
-	db.Where("name is ?", user).Find(&user_struct)
+	db.Where("name is ?", user).Find(&u)
 
 	db.Create(&finished{
 		User:        user,
-		Vorliebe:    u.Vorlieb,
+		Vorliebe:    u.Vorliebe,
 		Eigenschaft: u.Eigenschaft,
 		St:          u.St,
 		Ge:          u.Ge,
-		Ko:          u.Ku,
+		Ko:          u.Ko,
 		In:          u.In,
 		We:          u.We,
 		Ch:          u.Ch,
