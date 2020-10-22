@@ -23,15 +23,15 @@ type User struct {
 	Name        string
 	Password    string
 	Description string
-	Points	int	
-	Vorliebe   string
+	Points      int
+	Vorliebe    string
 	Eigenschaft string
-	St	uint
-	Ge	uint
-	Ko	uint
-	In	uint
-	We	uint
-	Ch	uint
+	St          uint
+	Ge          uint
+	Ko          uint
+	In          uint
+	We          uint
+	Ch          uint
 }
 
 type Session struct {
@@ -129,16 +129,16 @@ func Authenticate(cookie string) bool {
 }
 
 type Board struct {
-	User       string
-	Vorliebe   string
+	User        string
+	Vorliebe    string
 	Eigenschaft string
-	St	uint
-	Ge	uint
-	Ko	uint
-	In	uint
-	We	uint
-	Ch	uint
-	Storylines []StorylineTask
+	St          uint
+	Ge          uint
+	Ko          uint
+	In          uint
+	We          uint
+	Ch          uint
+	Storylines  []StorylineTask
 }
 
 type Storyline struct {
@@ -186,31 +186,30 @@ func BuildBoard(user string) Board {
 	}
 
 	board := Board{
-		User:       user,
-		Storylines: storylines,
-		Vorliebe:user_struct.Vorliebe,
-		Eigenschaft:user_struct.Eigenschaft,
-		St: user_struct.St,
-		Ge: user_struct.Ge,
-		Ko: user_struct.Ko,
-		In: user_struct.In,
-		We: user_struct.We,
-		Ch: user_struct.Ch,
-
+		User:        user,
+		Storylines:  storylines,
+		Vorliebe:    user_struct.Vorliebe,
+		Eigenschaft: user_struct.Eigenschaft,
+		St:          user_struct.St,
+		Ge:          user_struct.Ge,
+		Ko:          user_struct.Ko,
+		In:          user_struct.In,
+		We:          user_struct.We,
+		Ch:          user_struct.Ch,
 	}
 	return board
 }
 
 type finished struct {
-	User string
-	Vorliebe   string
+	User        string
+	Vorliebe    string
 	Eigenschaft string
-	St	uint
-	Ge	uint
-	Ko	uint
-	In	uint
-	We	uint
-	Ch	uint
+	St          uint
+	Ge          uint
+	Ko          uint
+	In          uint
+	We          uint
+	Ch          uint
 
 	Task string
 }
@@ -221,9 +220,20 @@ func VerifyTask(user string, task string, key string) {
 	if tasks[0].Key != key {
 		return
 	}
+	var u User
+	db.Where("name is ?", user).Find(&user_struct)
 
 	db.Create(&finished{
-		User: user,
+		User:        user,
+		Vorliebe:    u.Vorlieb,
+		Eigenschaft: u.Eigenschaft,
+		St:          u.St,
+		Ge:          u.Ge,
+		Ko:          u.Ku,
+		In:          u.In,
+		We:          u.We,
+		Ch:          u.Ch,
+
 		Task: task,
 	})
 }
