@@ -96,11 +96,20 @@ func userBoard(w http.ResponseWriter, r *http.Request) {
 
 //POST /api/user/create
 func userCreate(w http.ResponseWriter, r *http.Request) {
+	ra := rand.New(rand.NewSource(99))
 	u := database.User{
 		Name: r.FormValue("name"),
 		//TODO hash password
 		Password:    r.FormValue("password"),
 		Description: r.FormValue("description"),
+		Vorliebe:    r.FormValue("vorliebe"),
+		Eigenschaft: r.FormValue("eigenschaft"),
+		St:          uint(ra.Uint32() % 100),
+		Ge:          uint(ra.Uint32() % 100),
+		Ko:          uint(ra.Uint32() % 100),
+		In:          uint(ra.Uint32() % 100),
+		We:          uint(ra.Uint32() % 100),
+		Ch:          uint(ra.Uint32() % 100),
 	}
 	database.Insert_user(&u)
 }

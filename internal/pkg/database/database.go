@@ -23,7 +23,15 @@ type User struct {
 	Name        string
 	Password    string
 	Description string
-	Points      int
+	Points	int	
+	Vorliebe   string
+	Eigenschaft string
+	St	uint
+	Ge	uint
+	Ko	uint
+	In	uint
+	We	uint
+	Ch	uint
 }
 
 type Session struct {
@@ -122,6 +130,14 @@ func Authenticate(cookie string) bool {
 
 type Board struct {
 	User       string
+	Vorliebe   string
+	Eigenschaft string
+	St	uint
+	Ge	uint
+	Ko	uint
+	In	uint
+	We	uint
+	Ch	uint
 	Storylines []StorylineTask
 }
 
@@ -143,6 +159,8 @@ func BuildBoard(user string) Board {
 
 	var fin []finished
 	db.Where("user is ?", user).Find(&fin)
+	var user_struct User
+	db.Where("name is ?", user).Find(&user_struct)
 
 	var storylines []StorylineTask
 
@@ -170,12 +188,30 @@ func BuildBoard(user string) Board {
 	board := Board{
 		User:       user,
 		Storylines: storylines,
+		Vorliebe:user_struct.Vorliebe,
+		Eigenschaft:user_struct.Eigenschaft,
+		St: user_struct.St,
+		Ge: user_struct.Ge,
+		Ko: user_struct.Ko,
+		In: user_struct.In,
+		We: user_struct.We,
+		Ch: user_struct.Ch,
+
 	}
 	return board
 }
 
 type finished struct {
 	User string
+	Vorliebe   string
+	Eigenschaft string
+	St	uint
+	Ge	uint
+	Ko	uint
+	In	uint
+	We	uint
+	Ch	uint
+
 	Task string
 }
 

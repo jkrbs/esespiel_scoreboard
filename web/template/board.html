@@ -4,6 +4,15 @@
     </head>
     <body>
         <h1>Score Board of {{.User}}</h1>
+	<h2>Vorliebe: {{.Vorliebe}}</h2>
+	<h2>Eigenschaft: {{.Eigenschaft}}</h2>
+	<h2>Stärke: {{.St}}</h2>
+	<h2>Geschicklichkeit: {{.Ge}}</h2>
+	<h2>Konstitution: {{.Ko}}</h2>
+	<h2>Intelligenz: {{.In}}</h2>
+	<h2>Weisheit: {{.We}}</h2>
+	<h2>Charisma: {{.Ch}}</h2>
+	</br>
         <p>Push a button to verify the completion of each task.</p>
         <table>
             {{range .Storylines}}
