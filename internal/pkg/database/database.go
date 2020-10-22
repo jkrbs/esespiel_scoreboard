@@ -1,6 +1,7 @@
 package database
 
 import (
+	"log"
 	"strings"
 
 	"gorm.io/driver/postgres"
@@ -221,11 +222,11 @@ func VerifyTask(user string, task string, key string) {
 		return
 	}
 	if tasks[0].Key != key {
+		log.Printf("wrong verification key")
 		return
 	}
 	var u User
 	db.Where("name is ?", user).Find(&u)
-
 	db.Create(&finished{
 		User:        user,
 		Vorliebe:    u.Vorliebe,
