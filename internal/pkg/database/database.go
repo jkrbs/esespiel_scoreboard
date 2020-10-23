@@ -221,23 +221,27 @@ func VerifyTask(user string, task string, key string) {
 	if len(tasks) == 0 {
 		return
 	}
-	if tasks[0].Key != key {
+	for i, _ := range tasks {
+		if tasks[i].Key == key {
+			var u User
+			db.Where("name is ?", user).Find(&u)
+			db.Create(&finished{
+				User:        user,
+				Vorliebe:    u.Vorliebe,
+				Eigenschaft: u.Eigenschaft,
+				St:          u.St,
+				Ge:          u.Ge,
+				Ko:          u.Ko,
+				In:          u.In,
+				We:          u.We,
+				Ch:          u.Ch,
+
+				Task: task,
+			})
+			return
+		}
+
 		log.Printf("wrong verification key")
 		return
 	}
-	var u User
-	db.Where("name is ?", user).Find(&u)
-	db.Create(&finished{
-		User:        user,
-		Vorliebe:    u.Vorliebe,
-		Eigenschaft: u.Eigenschaft,
-		St:          u.St,
-		Ge:          u.Ge,
-		Ko:          u.Ko,
-		In:          u.In,
-		We:          u.We,
-		Ch:          u.Ch,
-
-		Task: task,
-	})
 }
